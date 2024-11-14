@@ -33,7 +33,7 @@ jobs:
       with:
         context: ./app
         push: true
-        tags: user/repo:latest
+        tags: karbyshevdm/myrep:latest
 
     - name: Run Docker Compose
       run: docker-compose up -d
