@@ -15,25 +15,28 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+      
+    - name: Verify Docker version
+      run: docker --version
+      
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_TOKEN }}
+#    - name: Login to Docker Hub
+#      uses: docker/login-action@v1
+#      with:
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_TOKEN }}
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
+    - name: Pull Docker images
+      run: docker compose pull
 
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v2
-      with:
-        context: ./app
-        push: true
-        tags: karbyshevdm/myrep:latest
+#    - name: Build and push Docker images
+#      uses: docker/build-push-action@v2
+#      with:
+#        context: ./app
+#        push: true
+#        tags: karbyshevdm/myrep:latest
 
     - name: Run Docker Compose
       run: docker compose up -d
